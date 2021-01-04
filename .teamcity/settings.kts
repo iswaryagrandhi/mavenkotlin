@@ -45,6 +45,11 @@ object Build : BuildType({
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             jdkHome = "%env.JDK_1_8%"
         }
+        maven {
+            goals = "clean test"
+            pomLocation = ".teamcity/pom.xml"
+            runnerArgs = "-Dmaven.test.failure.ignore=true"
+        }
     }
 
     triggers {
