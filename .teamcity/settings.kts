@@ -29,12 +29,12 @@ version = "2020.2"
 project {
 
     buildType(Build)
-    buildType(package)
+    buildType(mav_package)
     
-    sequential{
+    sequential {
     
     		buildType(Build)
-    		buildType(package)
+    		buildType(mav_package)
     
     }
 }
@@ -60,8 +60,8 @@ object Build : BuildType({
     }
 })
 
-object Build : BuildType({
-    name = "package"
+object mav_package : BuildType({
+    name = "mav_package"
 
     vcs {
         root(DslContext.settingsRoot)
