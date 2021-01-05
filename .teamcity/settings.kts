@@ -29,10 +29,18 @@ version = "2020.2"
 project {
 
     buildType(Build)
+    buildType(package)
+    
+    sequential{
+    
+    		buildType(Build)
+    		buildType(package)
+    
+    }
 }
 
 object Build : BuildType({
-    name = "test"
+    name = "Build"
 
     vcs {
         root(DslContext.settingsRoot)
@@ -41,6 +49,27 @@ object Build : BuildType({
     steps {
         maven {
             goals = "clean compile"
+            pomLocation = "helloworld/pom.xml"
+            runnerArgs = "-Dmaven.test.failure.ignore=true"
+        }
+    }
+
+    triggers {
+        vcs {
+        }
+    }
+})
+
+object Build : BuildType({
+    name = "package"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
+    steps {
+        maven {
+            goals = "clean package"
             pomLocation = "helloworld/pom.xml"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
